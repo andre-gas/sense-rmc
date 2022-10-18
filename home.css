@@ -1,0 +1,669 @@
+
+@font-face {
+    font-family: 'QlikView Sans';
+    src: url(qlikview-sans.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'LUI icons';
+    src: url(lui-icons.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "QlikView Sans", sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #1A1A1A;
+}
+
+h1 {
+    color: white;
+    background-color: #8C8C8C;
+    padding: 6pt 12pt;
+    margin: 0;
+}
+
+#tabs {
+    color: white;
+    background-color: #8C8C8C;
+    padding: 6pt 12pt;
+    margin-top: 0;
+}
+
+.tab {
+    color: #DDD;
+    margin: 0 2pt;
+    padding: 2pt 4pt;
+    cursor: pointer;
+}
+
+.tab:hover {
+    color: white;
+}
+
+.tab-selected {
+    color: white;
+    text-decoration: underline;
+}
+
+.version {
+    text-decoration: none;
+    color: white;
+    font-style: italic;
+    padding-right: 4pt;
+    padding-top: 7pt;
+    font-size: 10pt;
+}
+
+.login {
+    float: right;
+    text-decoration: none;
+    color: silver;
+    font-style: italic;
+    padding-right: 4pt;
+    padding-top: 7pt;
+    font-size: 10pt;
+    cursor: default;
+}
+
+
+.logout {
+    font-style: normal;
+    font-size: 24px;
+    padding-left: 4pt;
+    padding-top: 2pt;
+}
+
+.logout:hover {
+    color: white;
+}
+
+.heading {
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 3pt;
+}
+
+.panel {
+    color: #595959;
+    display: inline-block;
+    position: absolute;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding: 4pt;
+    font-size: 13px;
+    font-weight: normal;
+    text-decoration: none;
+    vertical-align: top;
+    border: outset 1pt #CCC;
+    background-color: #EEE;
+}
+
+.container-table {
+    width:90%;
+    border-collapse: collapse;
+}
+
+/* .reports-stream-panel {
+    width: 300px;
+    height: calc(100% - 144px);
+}
+
+.reports-stream-container {
+    height: calc(100% - 46px);
+    width: 100%;
+    overflow: auto;
+} */
+
+.report-container {
+    height: calc(100% - 46px);
+    width: 100%;
+    overflow: auto;
+}
+
+#report-edit-owner-edit {
+    font-family: 'LUI icons';
+    float: right;
+    cursor: pointer;
+    padding-right: 8pt;
+}
+
+.report-panel {
+    /* width: calc(100% - 380px); */
+    width: calc(100% - 64px);
+    height: calc(100% - 144px);
+    right: 16pt;
+}
+
+.reports-container {
+    height: calc(100% - 80px);
+    width: 100%;
+}
+
+.data-connection-panel {
+    width: calc(100% - 60px);
+    height: calc(100% - 144px);
+    right: 16pt;
+}
+
+.data-connections-container {
+    height: calc(100% - 80px);
+    width: 100%;
+}
+
+.load-panel {
+    color: #EEE;
+    padding: 18pt;
+    font-size: x-large;
+}
+
+.table-head {
+    background-color: #EEE;
+    border-bottom: #CCC 2px solid;
+    font-weight: bold;
+    padding: 2pt;
+    width: calc(100% - 22px);
+}
+
+.table-body {
+    overflow-y: scroll;
+    overflow-x: auto;
+    height: calc(100% - 32px);
+}
+
+.table-body-row {
+    border-bottom: #CCC 1px solid;
+    cursor: pointer;
+}
+
+.table-cell {
+    height: 20px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.table-cell-filter {
+    font-size: smaller;
+    width: calc(100% - 20px);
+    padding-right: 4pt;
+    padding-left: 4pt;
+}
+
+#modal-background, #modal-background-secondary, #modal-background-error {
+    position: absolute;
+    background-color: silver;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#modal-background {
+    z-index: 900;
+}
+
+#modal-background-secondary {
+    z-index: 920;
+}
+
+#modal-background-error {
+    z-index: 980;
+}
+
+.modal-dialog, .modal-dialog-secondary, .modal-dialog-error {
+    position: absolute;
+    opacity: 1;
+    left: 20%;
+}
+
+.modal-dialog {
+    z-index: 910;
+    top: 20%;
+    left: 20%;
+    width: 50%;
+}
+
+.modal-dialog-secondary {
+    z-index: 930;
+    top: 25%;
+    left: 25%;
+    width: 40%;
+}
+
+.modal-dialog-error {
+    z-index: 990;
+    top: 30%;
+    left: 27%;
+    width: 36%;
+}
+
+.dialog-header {
+    background-color: #595959;
+    height: 40px;
+    color: white;
+    padding-top: 10pt;
+    padding-left: 10pt;
+    border-top-left-radius: 6pt;
+    border-top-right-radius: 6pt;
+    font-weight: bold;
+}
+
+.dialog-footer {
+    background-color: #8C8C8C;
+    height: 40px;
+    padding-top: 10pt;
+    border-bottom-left-radius: 6pt;
+    border-bottom-right-radius: 6pt;
+}
+
+.dialog-footer button {
+    margin-right: 10pt;
+    float: right;
+    line-height: 24px;
+    min-width: 70px;
+    height: 28px;
+    border: 1px solid #262626;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    background-color: #262626;
+}
+
+.dialog-footer button:hover {
+    border-color: white;
+}
+
+.dialog-footer button:disabled {
+    border-width: 1px;
+    border-color: #262626;
+    color: #262626;
+    background-color: transparent;
+    cursor: default;
+}
+
+.dialog-body {
+    background-color: white;
+    padding: 12pt;
+    height: calc(100% - 210px);
+}
+
+.dialog-section-head {
+    font-weight: bold;
+    text-transform: capitalize;
+    padding-bottom: 4pt;
+}
+
+.dialog-section-scrollable {
+    overflow-y: auto;
+}
+
+#edit-report-section .dialog-section-scrollable {
+    height: calc(100% - 310px);
+}
+
+#edit-data-connection-section .dialog-section-scrollable {
+    height: calc(100% - 180px);
+}
+
+.dialog-section-feedback {
+    font-size: 13px;
+    color: #b94a48;
+    background-color: #f2dede;
+}
+
+.dialog-section-row {
+    font-size: 13px;
+    padding-bottom: 4pt;
+}
+
+.dialog-section-row span {
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+}
+
+.dialog-section-row select {
+    width: calc(100% - 220px);
+}
+
+.custom-properties-values-box {
+    display: inline-block;
+    width: calc(100% - 220px);
+    height: 43pt;
+    border: #8C8C8C solid 1px;
+    overflow: auto;
+}
+
+.custom-properties-value {
+    display: block;
+    border: transparent solid 1px;
+}
+
+.custom-property-value-filter-row {
+    margin-bottom: 6pt;
+}
+
+
+#custom-property-value-dialog {
+    height: 70%;
+}
+
+#custom-property-value-body {
+    height: calc(100% - 8pt);
+    margin-top: 4pt;
+}
+
+#custom-property-value-list {
+    overflow: auto;
+    height: calc(100% - 16pt);
+}
+
+.custom-property-value-row {
+    cursor: pointer;
+    padding-left: 2pt;
+}
+
+.custom-property-value-row:hover {
+    background-color: #8C8C8C;
+    color: white;
+}
+
+span.custom-properties-add {
+    width: 20px;
+    float: right;
+    color: #CCC;
+    font-family: 'LUI icons';
+    margin-top: 2px;
+    margin-right: 6px;
+}
+
+.custom-properties-add:hover {
+    color: #1A1A1A;
+}
+
+.custom-properties-add:before {
+    content: "\050";
+}
+
+
+span.custom-properties-delete {
+    width: 20px;
+    float: left;
+    color: #CCC;
+    font-family: 'LUI icons';
+    margin-top: 2px;
+    margin-left: 4px;
+}
+
+.custom-properties-delete:hover {
+    color: #1A1A1A;
+}
+
+.custom-properties-delete:before {
+    content: "\045";
+}
+
+.dialog-section-row input[type=text] {
+    width: calc(100% - 220px);
+}
+
+input[type=text].dialog-section-with-btn {
+    width: calc(100% - 250px);
+}
+
+.dialog-section-row input[readonly] {
+    color: #AAA;
+}
+
+input.dialog-section-edit {
+    width: calc(100% - 240px);
+    border: 1px #8C8C8C solid;
+    color: #AAA;
+}
+
+span.dialog-section-edit-btn {
+    width: 20px;
+    float: right;
+    color: #CCC;
+    font-family: 'LUI icons';
+    margin-top: 4px;
+    margin-right: 12px;
+}
+
+.dialog-section-edit-btn:hover {
+    color: #1A1A1A;;
+}
+
+.dialog-section-edit-btn:before {
+    content: "@";
+}
+
+.dialog-section-count {
+    font-style: normal;
+}
+
+#report-change-owner-dialog {
+    height: 70%;
+}
+
+#report-change-owner-body {
+    height: calc(100% - 8pt);
+    margin-top: 4pt;
+}
+
+.report-change-hint {
+    padding-top: 8pt;
+    padding-left: 4pt;
+    font-style: italic;
+}
+
+#error-dialog {
+    height: 240px;
+}
+
+#working-section {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    width: 210px;
+    height: 35px;
+    border: 1px silver solid;
+    border-radius: 2pt;
+    background-color: #DDD;
+    padding: 4pt;
+}
+
+.panel table {
+    font-size: 13px;
+}
+
+.panel i {
+    float: left;
+    font-family: 'LUI icons';
+    color: #595959;
+    padding-right: 7px;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    vertical-align: text-bottom;
+    /* font-size: 16px; */
+    font-style: normal;
+}
+
+.panel td {
+    border-bottom: solid 1px #CCC;
+}
+
+.toolbar {
+    padding-top: 7pt;
+    padding-bottom: 7pt;
+    padding-left: 4pt;
+    margin-top: 15px; 
+    margin-left: -7px;
+    margin-right: -7px;
+    background-color: #8C8C8C;
+}
+
+.toolbar button {
+    margin-right: 10pt;
+    line-height: 24px;
+    min-width: 70px;
+    height: 28px;
+    border: 1px solid #262626;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    background-color: #262626;
+}
+
+.toolbar button:hover {
+    border-color: white;
+}
+
+.toolbar button:disabled {
+    border-width: 1px;
+    border-color: #262626;
+    color: #262626;
+    background-color: transparent;
+    cursor: default;
+}
+
+.icon-App:before {
+    content: "\077";
+}
+
+.icon-Task:before {
+    content: "\078";
+}
+
+.icon-Stream:before {
+    content: "\0E3";
+}
+
+.icon-DataConnection:before {
+    content: "\038";
+}
+
+.icon-warning {
+    font-size: 30px;
+    color: #FFCE26;
+    font-weight: normal;
+    font-style: normal;
+    float: left;
+    font-family: 'LUI icons';
+    padding-right: 16pt;
+    vertical-align: middle;
+}
+
+
+.edit-icon {
+    font-family: 'LUI icons';
+    padding-right: 2pt;
+}
+
+.tabs-icon {
+    font-family: 'LUI icons';
+    color: #DDD;
+    float: right;
+    cursor: pointer;
+    padding-right: 12pt;
+}
+
+.tabs-icon span {
+    font-family: "QlikView Sans", sans-serif;;
+}
+
+.tabs-icon:hover {
+    color: white;
+}
+
+.sort-icon {
+    font-family: 'LUI icons';
+    cursor: pointer;
+    width: 14px;
+    height: 18px;
+    font-weight: normal;
+    padding-left: 4pt;
+}
+
+.sort-pending {
+    color: lightgray;
+}
+
+.sort-asc:before {
+    content: "\052";
+}
+
+.sort-desc:before {
+    content: "\053";
+}
+
+.icon-warning:before {
+    content: "\0E8";
+}
+
+.icon-refresh:before {
+    content: "\0F4";
+}
+
+.icon-logout:before {
+    content: "\2264";
+}
+
+.icon-new-tab:after {
+    padding-left: 4pt;
+    content: "w";
+}
+
+.icon-out:before {
+    content: "I";
+}
+
+.icon-help {
+    font-family: 'LUI icons';
+    color: darkgray;
+    float: right;
+    padding-right: 12pt;
+    font-weight: normal;
+    cursor: help;
+}
+
+.icon-help:before {
+    content: "D";
+}
+
+.icon-edit:before {
+    content: "@";
+}
+
+.selectable {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.selectable td {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.selected {
+    background-color: #8C8C8C;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.not-implemented-yet {
+    display: none;
+    font-style: italic;
+}

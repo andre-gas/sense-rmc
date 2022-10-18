@@ -1,0 +1,142 @@
+<html>
+
+<head>
+    <title>Report Management Console</title>
+    <link rel="stylesheet" href="home.css">
+    <link id="favicon" rel="shortcut icon" href="favicon.ico">
+    <!-- <script>
+        var winNav = window.navigator;
+        var vendorName = winNav.vendor;
+        var isOpera = typeof window.opr !== "undefined";
+        var isIEedge = winNav.userAgent.indexOf("Edge") > -1;
+        if (window.chrome === null || typeof window.chrome === "undefined" ||
+            vendorName !== "Google Inc." || isOpera === true || isIEedge === true) {
+            alert('This POC (Proof of Concept) is only tested in Chrome on Windows.\r\nIt may, or may not, work in other browsers')
+        }
+    </script> -->
+    <script src="util.js"></script>
+    <script src="entities.js"></script>
+</head>
+
+<body>
+    <h1>Report Management Console <span class="version">0.1</span><i id="logout" title="Logout"
+            class="logout tabs-icon icon-logout"></i><a id="login" class="login" href="" title="Current user">...</a>
+    </h1>
+
+    <!-- Tab Row -->
+    <h5 id="tabs">
+        <span class="tab" data-section="reports">Report</span>
+        <span data-section="edit-report" class="tab hidden tab-selected"><i class="edit-icon icon-App"></i> Edit Report</span>
+        <i id="qmc" class="tabs-icon icon-out hidden"><span> QMC</span></i>
+        <i id="hub" class="tabs-icon icon-new-tab" title="Open Hub in new tab"><span> Hub</span></i>
+        <i id="refresh" title="Refresh" class="tabs-icon icon-refresh"></i>
+    </h5>
+
+    <!-- Reports Section ========================================================================================== -->
+    <div id="reports-section" class="hidden">
+        <!-- <div class="reports-stream-panel panel">
+            <div class="heading">
+                <i class="icon-large icon-Stream"></i>Users (<span id="reports-stream-filtered-count">...</span>/<span
+                    id="reports-stream-count">...</span>)
+            </div>
+            <div><span>Filter: </span><input id="reports-stream-filter" type="text" style="width:220px"/></div>
+            <div class="reports-stream-container">
+                <table class="container-table">
+                    <tbody id="reports-stream-table" class="table-body"></tbody>
+                </table>
+            </div>
+        </div> -->
+        <div class="report-panel panel">
+            <div class="heading"><i class="icon-large icon-App"></i>Reports (<span
+                    id="reports-filtered-count">...</span>/<span id="reports-count">...</span>)</div>
+            <div id="reports-container" class="reports-container"></div>
+            <div class="toolbar">
+                <!-- <button id="report-edit-open" disabled>Edit</button> -->
+                <!-- <button id="report-change-owner-open" disabled>Change owner</button> -->
+                <button id="report-delete-open" disabled>Delete</button>
+                <!-- <button id="report-publish-open" disabled>Publish</button> -->
+                <!-- <button id="report-move-open" disabled>Move</button> -->
+                <!-- <button id="report-import-open">Import</button> -->
+                <!-- <button id="report-migrate" disabled class="not-implemented-yet">Migrate</button> -->
+                <!-- <button id="report-export-open" disabled>Export</button> -->
+                <!-- <button id="report-duplicate" disabled>Duplicate</button> -->
+                <!-- <button id="report-reload" disabled>Reload now</button> -->
+                <!-- <button id="report-create-task" disabled>Create reload task</button> -->
+                <!-- <button id="report-open" disabled style="float:right">Open in Hub</button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Delete (confirm) Dialog  -->
+    <div id="report-delete-dialog" class="modal-dialog hidden">
+        <div class="dialog-header">Delete</div>
+        <div class="dialog-body">
+            <div><i class="icon-large icon-warning"></i><span class="delete-message">Are you sure you want to
+                    delete this report: &quot;<span id="report-to-be-deleted"></span>&quot;</span></div>
+        </div>
+        <div class="dialog-footer"><button id="report-delete-ok">OK</button><button id="report-delete-cancel">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Report Change Owner Dialog  -->
+    <!-- <div id="report-change-owner-dialog" class="modal-dialog hidden">
+        <div class="dialog-header">Change Owner of App</div>
+        <div class="dialog-body">
+            <div>Select New Owner | Filter: <input id="report-change-owner-filter"/> <span id="report-change-owner-status"></span></div>
+            <div id="report-change-owner-body">
+                <div class="report-change-hint">Enter a filter and press enter</div>
+            </div>
+        </div>
+        <div class="dialog-footer"><button id="report-change-owner-ok" disabled>OK</button><button id="report-change-owner-cancel">Cancel</button>
+        </div>
+    </div> -->
+
+    <!-- Report Edit Section  -->
+    <!-- <div id="edit-report-section" class="hidden">
+        <div class="dialog-body">
+            <div class="dialog-section-head">Identification</div>
+            <div class="dialog-section-row"><span>Name</span><input id="report-edit-name" type="text" placeholder="Enter name" required /></div>
+            <div class="dialog-section-row"><span>App ID</span><input readonly id="report-edit-id" type="text" /></div>
+            <div class="dialog-section-row"><span>Owner</span><input readonly id="report-edit-owner" type="text" /></div>
+            <div class="dialog-section-row"><span>Created</span><input readonly id="report-edit-created" type="text" />
+            </div>
+            <div class="dialog-section-row"><span>Last Modified</span><input readonly id="report-edit-last-modified"
+                    type="text" /></div>
+            <div class="dialog-section-row"><span>File size (MB)</span><input readonly id="report-edit-file-size"
+                    type="text" /></div>
+        </div>
+        <div class="dialog-footer">
+            <button id="report-edit-ok">OK</button>
+            <button id="report-edit-apply">Apply</button>
+            <button id="report-edit-cancel">Cancel</button>
+            <button id="report-edit-assign-to-me">Assign to me</button>
+        </div>
+    </div> -->
+
+    <!-- Shown while loading -->
+    <div id="loading" class="load-panel">
+        <div class="heading" id="status">Loading...</div>
+    </div>
+
+    <!-- Shown while working -->
+    <div id="working-section" class="hidden">
+        <div id="working-text"></div>
+    </div>
+
+    <!-- Some modal dialog helper stuff + general error dialog -->
+    <div id="modal-background" class="hidden"></div>
+    <div id="modal-background-secondary" class="hidden"></div>
+    <div id="modal-background-error" class="hidden"></div>
+    <div id="error-dialog" class="modal-dialog-error hidden">
+        <div class="dialog-header">Error</div>
+        <div class="dialog-body">
+            <div><i class="icon-large icon-warning"></i><span id="error-message">Are you sure you want to delete
+                    this task</span></div>
+        </div>
+        <div class="dialog-footer"><button id="error-cancel">Close</button></div>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+
+</html>
