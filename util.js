@@ -195,6 +195,7 @@ function QTable(options) {
         const bodySection = document.createElement('div');
         bodySection.className = 'table-body';
 
+        // console.log('DEBUG updateRows', dataValues);
         dataValues.forEach(value =>  {
             addRow(bodySection, options.columns, totwidth, value);
         })

@@ -90,17 +90,67 @@ const Entities = function () {
         this._reports = new _EntityList()
     }
 
+    // Backup lista report funzionante
+    // _Entities.prototype.loadReport = function () {
+    //     return ask('/sharedcontent/full', { query: { privileges: true } })
+    //         .then(answers => {
+    //             let reports = [];
+    //             answers.forEach(answer => {
+    //                 reports = reports.concat(answer)
+    //             })
+    //             reports = reports.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
+    //             this._reports.updateAll(reports);
+                
+    //             // return Promise.resolve(true)
+    //         })
+    // }
     _Entities.prototype.loadReport = function () {
         return ask('/sharedcontent/full', { query: { privileges: true } })
             .then(answers => {
                 let reports = [];
                 answers.forEach(answer => {
+                    answer.metaData.forEach(metadata => {
+                        var metadata_key = metadata.key;
+                        delete metadata.key;
+                        answer[metadata_key] = metadata.value;
+                    })
+                    delete answer.metaData;
+
+                    if(answer.type == 'Qlik report') {
+                        answer.type = 'NPrinting report'
+                    }
+
+                    answer.lastReference = '';
+                    answer.references.forEach(reference => {
+                        var temp = {};
+                        temp.id = reference.id;
+                        temp.externalPath = reference.externalPath;
+                        creationDate = reference.externalPath.split("/")[3];
+                        year = creationDate.substr(0,4);
+                        month = creationDate.substr(4,2);
+                        day = creationDate.substr(6,2);
+                        hour = creationDate.substr(9,2);
+                        min = creationDate.substr(11,2);
+                        sec = creationDate.substr(13,2);
+                        // console.log(year, month - 1, day, hour, min, sec)
+                        // creationDate = year.concat("-", month, "-", day, "T", hour, ":", min, ":", sec, "Z");
+                        creationDateFormatted = new Date(year.concat("-", month, "-", day, "T", hour, ":", min, ":", sec, "Z")).toISOString();
+                        temp.creationDate = creationDateFormatted;
+                        // console.log(temp);
+                        
+                        if(answer.lastReference == '' || answer.lastReference.creationDate < temp.creationDate){
+                            answer.lastReference = temp;
+                        }
+                    })
+
                     reports = reports.concat(answer)
                 })
                 reports = reports.sort((lhs, rhs) => lhs.name.localeCompare(rhs.name));
                 this._reports.updateAll(reports);
                 
-                // return Promise.resolve(true)
+                console.log(reports);
+                return Promise.resolve(true)
+
             })
     }
    

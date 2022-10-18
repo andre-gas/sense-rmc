@@ -95,12 +95,16 @@ function updateReportsReportTable() {
     const reports = Entities.getReports({ selected: true });
     document.getElementById('reports-count').textContent = reports.count;
     document.getElementById('reports-filtered-count').textContent = reports.list.length;
+
+    // console.log('DEBUG updateReportsReportTable', reports);
     QTable({
         container: 'reports-container',
         columns: [
             { name: 'Name', width: 5, value: report => report.name, title: report => report.id, filter: 'name', sort: (lhs,rhs) => compareTexts(lhs.name, rhs.name) },
             { name: 'Owner', width: 2, value: report => optName(report.owner), filter: 'owner', sort: (lhs,rhs) => compareTexts(optName(lhs.owner), optName(rhs.owner)) },
-            { name: 'Last Edit', width: 2, value: report => toDate(report.modifiedDate), sort: (lhs,rhs) => compareDate(lhs.modifiedDate, rhs.modifiedDate) }
+            { name: 'Type', width: 2, value: report => report.type, title: report => report.type, sort: (lhs,rhs) => compareTexts(lhs.type, rhs.type) },
+            { name: 'Format', width: 1, value: report => report['np-report-format'], sort: (lhs,rhs) => compareTexts(lhs['np-report-format'], rhs['np-report-format']) },
+            { name: 'Last Report Creation Time', width: 2, value: report => toDate(report.lastReference.creationDate), sort: (lhs,rhs) => compareDate(lhs.lastReference.creationDate, rhs.lastReference.creationDate) }
         ],
         values: reports.list,
         selected: reports.selectedId,
@@ -123,7 +127,7 @@ function updateBoard() {
     if (selected.view.name === 'reports') {
         updateReportsReportTable();
         const selectedReport = Entities.getSelectedReport()
-        // document.getElementById('report-open').disabled = !selectedReport;
+        document.getElementById('report-open').disabled = !selectedReport;
         // document.getElementById('report-edit-open').disabled = !selectedReport || selectedReport.privileges.indexOf('update') === -1;
         // document.getElementById('report-change-owner-open').disabled = !selectedReport || selectedReport.privileges.indexOf('changeowner') === -1;
         document.getElementById('report-delete-open').disabled = !selectedReport || selectedReport.privileges.indexOf('delete') === -1;
@@ -326,12 +330,12 @@ fetch('../../qps/user')
             }
         });
 
-        // document.getElementById('report-open').addEventListener('click', ev => {
-        //     const selectedReport = Entities.getSelectedReport()
-        //     if (selectedReport) {
-        //         window.open('../../sense/app/' + selectedReport.id, '_blank');
-        //     }
-        // })
+        document.getElementById('report-open').addEventListener('click', ev => {
+            const selectedReport = Entities.getSelectedReport()
+            if (selectedReport) {
+                window.open(selectedReport.lastReference.externalPath, '_blank');
+            }
+        })
         document.getElementById('qmc').addEventListener('click', ev => {
             window.open('../../qmc', '_blank');
         })
@@ -503,6 +507,6 @@ fetch('../../qps/user')
         // });
     })
     .catch(err => {
-        document.getElementById('status').textContent = 'Access denied';
         console.log(err);
+        document.getElementById('status').textContent = 'Access denied';
     })
