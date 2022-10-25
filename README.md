@@ -11,10 +11,8 @@ For this console I used the [AMC](https://community.qlik.com/t5/Official-Support
 3. Set a name for the library. Be careful, the name used is going to be used later to call the resource, it is case sensitive. In the below example I used "rmc".
 ![03](https://user-images.githubusercontent.com/33024172/197726254-1796edac-5986-45cb-baea-a2d8835fb808.png)
 4. After creating the library you set the permission to access it. You could limit the access by users, groups, etc.. or you could enable it for all users using the following syntax (you should insert it into advanced form)
-```
-!user.IsAnonymous()
-```
-  ![04](https://user-images.githubusercontent.com/33024172/197726499-71a33fb0-ac35-4588-ab2b-c39920492369.png)
+`!user.IsAnonymous()`
+![04](https://user-images.githubusercontent.com/33024172/197726499-71a33fb0-ac35-4588-ab2b-c39920492369.png)
 5. Click on *Upload* button to upload files into library. You must import all files of that project.
 ![05](https://user-images.githubusercontent.com/33024172/197726515-f90266bc-bd3a-4d3a-8fb2-65108515c8b1.png)
 6. Ok, great, you've installed the console and now you could access it from the URL https://<senseserver>/<vp/content/<library name>/home.html (in my case https://senseserver/content/rmc/home.html).
