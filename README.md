@@ -19,4 +19,5 @@ For this console I used the [AMC](https://community.qlik.com/t5/Official-Support
 
 ## How it works
 Using this console you could list and manage all reports for those whom you have permission in QMC context. You could view your reports by deafult, while the RootAdmin could manage them all.
+
 To open it you must have the right security rules in Hub context. Only the owner could open a report, by default.
