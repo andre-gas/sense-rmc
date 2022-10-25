@@ -14,7 +14,7 @@ For this console I used the [AMC](https://community.qlik.com/t5/Official-Support
 ```
 !user.IsAnonymous()
 ```
-![04](https://user-images.githubusercontent.com/33024172/197726499-71a33fb0-ac35-4588-ab2b-c39920492369.png)
+  ![04](https://user-images.githubusercontent.com/33024172/197726499-71a33fb0-ac35-4588-ab2b-c39920492369.png)
 5. Click on *Upload* button to upload files into library. You must import all files of that project.
 ![05](https://user-images.githubusercontent.com/33024172/197726515-f90266bc-bd3a-4d3a-8fb2-65108515c8b1.png)
 6. Ok, great, you've installed the console and now you could access it from the URL https://<senseserver>/<vp/content/<library name>/home.html (in my case https://senseserver/content/rmc/home.html).
